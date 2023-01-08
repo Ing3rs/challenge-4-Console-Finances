@@ -106,63 +106,19 @@ use loop for calculation
 
 not including the array, around 40 lines of code
 
-
-
-
-// Stack overflow solution: 
-function arraySum(obj) {
-    var sum = 0;
-    var num = Number(obj);
-
-    if (typeof obj === 'boolean') {
-        return 0;
-    }
-
-    else if (typeof num === 'number' && !isNaN(num)) {
-        return num;
-    }
-
-    else if (typeof obj !== 'object') {
-        return 0;
-    }
-
-    else if (obj.length) {
-        for (var i = 0; i < obj.length; i++) {
-            sum += arraySum(obj[i]);
-        }
-    }
-    else {
-        for (var p in obj) {
-            sum += arraySum(obj[p]);
-        }
-    }
-
-    return sum;
-}
-
-var totalFinances = arraySum(finances);
-console.log("Total: " + totalFinances);
-
-
 */
 
 
 
+// MY CODE: 
 
+// TOTAL NUMBER OF MONTHS
 
-
-
-
-
-
-// Try 2
-
-
-// Total number of months
 var totalMonths = finances.length;
 
 
-// Total of all numbers
+// TOTAL OF ALL NUMBERS
+
 var totalFinances = 0;
 
 for (var i = 0; i < finances.length; i++) {
@@ -170,7 +126,8 @@ for (var i = 0; i < finances.length; i++) {
 }
 
 
-// Average change
+// AVERAGE CHANGE
+
 var totalMonthlyDiff = 0;
 
 for (var i = 1; i < finances.length; i++) {
@@ -178,34 +135,49 @@ for (var i = 1; i < finances.length; i++) {
 }
 
 averageChange = totalMonthlyDiff / finances.length;
+averageChange = averageChange.toFixed(2);
 
 
-// Greatest increase in profits
+// GREATEST INCREASE IN PROFITS
+// Should result in: ['Feb-2012', 1170593],
+
 var greatestIncrease = 0;
+var monthGreatestIncrease = 0;
 
-for (var i = 0; i < finances.length; i++) {
-    if (finances[i][1] > greatestIncrease) {
-        greatestIncrease = finances[i][1];
+for (var i = 1; i < finances.length; i++) {
+    
+    var highestProfit = (finances[i][1] - finances[i-1][1]);
+
+    if (highestProfit > greatestIncrease) {
+        greatestIncrease = highestProfit
+        monthGreatestIncrease = finances[i][0];
     }
 }
 
-console.log(greatestIncrease);
 
+// GREATEST DECREASE IN PROFITS
+// Should result in: ['Sep-2013', -1196225]
 
-// Greatest decrease in profits
 var greatestDecrease = 0;
+var monthGreatestDecrease = 0;
 
-for (var i = 0; i < finances.length; i++) {
-    if (finances[i][1] < greatestDecrease) {
-        greatestDecrease = finances[i][1];
+for (var i = 1; i < finances.length; i++) {
+    
+    var lowestProfit = (finances[i-1][1] - finances[i][1]);
+
+    if (lowestProfit > greatestDecrease) {
+        greatestDecrease = lowestProfit
+        monthGreatestDecrease = finances[i][0];
     }
 }
-console.log(greatestDecrease);
 
 
-// Final result (consolidate this when finished so that it's in one console log)
+// LOG ALL RESULTS IN CONSOLE
+
 console.log("Financial Analysis");
 console.log("----------------------------");
 console.log("Total Months: " + totalMonths);
 console.log("Total: $" + totalFinances);
-console.log("Average change: $" + averageChange.toFixed(2));
+console.log("Average Change: $" + averageChange);
+console.log("Greatest Increase in Profits: " + monthGreatestIncrease + " $" + greatestIncrease);
+console.log("Greatest Decrease in Profits: " + monthGreatestDecrease+ " $" + greatestDecrease);
