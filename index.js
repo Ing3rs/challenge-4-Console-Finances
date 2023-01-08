@@ -96,14 +96,9 @@ total months - .length
 
 total - add all numbers together
 
-average change - subtract the previous month from this months profit (popsitive is profit, negative is loss), do this for every month. then divide this by total number of months and this will give you the average.
+average change - subtract the previous month from this months profit (positive is profit, negative is loss), do this for every month. then divide this by total number of months and this will give you the average.
 
 greatest increase / decrease in profits - based on the work done in previous point, then say the month and total increase / decrease in brackets
-
-do not need to convert to currency, simply add a string i.e. "Total: $"
-
-all done in console log
-
 
 average - it will give a long number. to round to the 100th place (2 decimal), use .toFixed(2);
 
@@ -111,20 +106,10 @@ use loop for calculation
 
 not including the array, around 40 lines of code
 
-*/
 
 
-// Header
-console.log("Financial Analysis");
-console.log("----------------------------");
 
-
-// Total number of months
-var totalMonths = finances.length;
-console.log("Total Months: " + totalMonths);
-
-
-// Overall total
+// Stack overflow solution: 
 function arraySum(obj) {
     var sum = 0;
     var num = Number(obj);
@@ -159,24 +144,68 @@ var totalFinances = arraySum(finances);
 console.log("Total: " + totalFinances);
 
 
-
-
-// Math.min() and Math.max() can be used to find the lowest or highest value in a list of arguments: 
-/*
-var greatestIncrease = Math.max(finances);
-console.log(greatestIncrease);
-
-var greatestDecrease = Math.min(finances);
-console.log(greatestDecrease);
 */
 
 
-// var sum = 0;
-     
-//     for (var i = 0; i < finances.length; i++) {
-//         if (Number.isInteger() === true) {
-//             finances.reduce(function(pv, cv) { return pv + cv; }, 0);
-//         }
-//     }
 
-// console.log("Total: " + sum);
+
+
+
+
+
+
+
+// Try 2
+
+
+// Total number of months
+var totalMonths = finances.length;
+
+
+// Total of all numbers
+var totalFinances = 0;
+
+for (var i = 0; i < finances.length; i++) {
+    totalFinances += finances[i][1];
+}
+
+
+// Average change
+var totalMonthlyDiff = 0;
+
+for (var i = 1; i < finances.length; i++) {
+    totalMonthlyDiff += finances[i][1] - finances[i-1][1];
+}
+
+averageChange = totalMonthlyDiff / finances.length;
+
+
+// Greatest increase in profits
+var greatestIncrease = 0;
+
+for (var i = 0; i < finances.length; i++) {
+    if (finances[i][1] > greatestIncrease) {
+        greatestIncrease = finances[i][1];
+    }
+}
+
+console.log(greatestIncrease);
+
+
+// Greatest decrease in profits
+var greatestDecrease = 0;
+
+for (var i = 0; i < finances.length; i++) {
+    if (finances[i][1] < greatestDecrease) {
+        greatestDecrease = finances[i][1];
+    }
+}
+console.log(greatestDecrease);
+
+
+// Final result (consolidate this when finished so that it's in one console log)
+console.log("Financial Analysis");
+console.log("----------------------------");
+console.log("Total Months: " + totalMonths);
+console.log("Total: $" + totalFinances);
+console.log("Average change: $" + averageChange.toFixed(2));
