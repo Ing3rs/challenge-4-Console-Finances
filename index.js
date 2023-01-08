@@ -86,3 +86,97 @@ var finances = [
 ['Jan-2017', 138230],
 ['Feb-2017', 671099]
 ];
+
+/*
+
+NOTES FROM CLASS: 
+-----------------
+
+total months - .length
+
+total - add all numbers together
+
+average change - subtract the previous month from this months profit (popsitive is profit, negative is loss), do this for every month. then divide this by total number of months and this will give you the average.
+
+greatest increase / decrease in profits - based on the work done in previous point, then say the month and total increase / decrease in brackets
+
+do not need to convert to currency, simply add a string i.e. "Total: $"
+
+all done in console log
+
+
+average - it will give a long number. to round to the 100th place (2 decimal), use .toFixed(2);
+
+use loop for calculation
+
+not including the array, around 40 lines of code
+
+*/
+
+
+// Header
+console.log("Financial Analysis");
+console.log("----------------------------");
+
+
+// Total number of months
+var totalMonths = finances.length;
+console.log("Total Months: " + totalMonths);
+
+
+// Overall total
+function arraySum(obj) {
+    var sum = 0;
+    var num = Number(obj);
+
+    if (typeof obj === 'boolean') {
+        return 0;
+    }
+
+    else if (typeof num === 'number' && !isNaN(num)) {
+        return num;
+    }
+
+    else if (typeof obj !== 'object') {
+        return 0;
+    }
+
+    else if (obj.length) {
+        for (var i = 0; i < obj.length; i++) {
+            sum += arraySum(obj[i]);
+        }
+    }
+    else {
+        for (var p in obj) {
+            sum += arraySum(obj[p]);
+        }
+    }
+
+    return sum;
+}
+
+var totalFinances = arraySum(finances);
+console.log("Total: " + totalFinances);
+
+
+
+
+// Math.min() and Math.max() can be used to find the lowest or highest value in a list of arguments: 
+/*
+var greatestIncrease = Math.max(finances);
+console.log(greatestIncrease);
+
+var greatestDecrease = Math.min(finances);
+console.log(greatestDecrease);
+*/
+
+
+// var sum = 0;
+     
+//     for (var i = 0; i < finances.length; i++) {
+//         if (Number.isInteger() === true) {
+//             finances.reduce(function(pv, cv) { return pv + cv; }, 0);
+//         }
+//     }
+
+// console.log("Total: " + sum);
