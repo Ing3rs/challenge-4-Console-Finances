@@ -30,8 +30,6 @@ The JavaScript code should analyzes the provided financial records to calculate 
 
 ![portfolio demo](https://github.com/Ing3rs/challenge-4-Console-Finances/blob/main/assets/images/result-in-console.jpg)
 
-This homework is graded based on the following criteria: 
-
 ---
 
 ## Copyright
