@@ -4,7 +4,7 @@
 
 In this challenge, I was tasked with creating JavaScript code for analyzing the financial records of a company.
 
-The JavaScript code should analyzes the provided financial records to calculate each of the following:
+The JavaScript code should analyse the provided financial records to calculate each of the following:
 
 * The total number of months included in the dataset
 
