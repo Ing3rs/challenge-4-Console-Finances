@@ -87,28 +87,6 @@ var finances = [
 ['Feb-2017', 671099]
 ];
 
-/*
-
-NOTES FROM CLASS: 
------------------
-
-total months - .length
-
-total - add all numbers together
-
-average change - subtract the previous month from this months profit (positive is profit, negative is loss), do this for every month. then divide this by total number of months and this will give you the average.
-
-greatest increase / decrease in profits - based on the work done in previous point, then say the month and total increase / decrease in brackets
-
-average - it will give a long number. to round to the 100th place (2 decimal), use .toFixed(2);
-
-use loop for calculation
-
-not including the array, around 40 lines of code
-
-*/
-
-
 
 // MY CODE: 
 
@@ -118,6 +96,7 @@ var totalMonths = finances.length;
 
 
 // TOTAL OF ALL NUMBERS
+// Loop through each item in the finances variable, targeting only the number and adding them to one another
 
 var totalFinances = 0;
 
@@ -127,6 +106,7 @@ for (var i = 0; i < finances.length; i++) {
 
 
 // AVERAGE CHANGE
+// Loop through variable and subtract the current month from the previous month
 
 var totalMonthlyDiff = 0;
 
@@ -134,50 +114,55 @@ for (var i = 1; i < finances.length; i++) {
     totalMonthlyDiff += finances[i][1] - finances[i-1][1];
 }
 
-averageChange = totalMonthlyDiff / finances.length;
-averageChange = averageChange.toFixed(2);
+averageChange = totalMonthlyDiff / finances.length; // Divide by total number of months to get average
+averageChange = averageChange.toFixed(2); // Round to 2 decimal places
 
 
 // GREATEST INCREASE IN PROFITS
-// Should result in: ['Feb-2012', 1170593],
+// Should result in: 'Feb-2012', 1926159
 
 var greatestIncrease = 0;
 var monthGreatestIncrease = 0;
 
+// Loop through finances, subtracting current month from previous month to find highest profit
 for (var i = 1; i < finances.length; i++) {
     
     var highestProfit = (finances[i][1] - finances[i-1][1]);
 
     if (highestProfit > greatestIncrease) {
         greatestIncrease = highestProfit
-        monthGreatestIncrease = finances[i][0];
+        monthGreatestIncrease = finances[i][0]; // month index of item with greated increase
     }
 }
 
 
 // GREATEST DECREASE IN PROFITS
-// Should result in: ['Sep-2013', -1196225]
+// Should result in: 'Sep-2013', -2196167
+// I'm not sure I've done this one correctly as it didn't give me a negative number, so some feedback would be greatly appreciated :)
 
 var greatestDecrease = 0;
 var monthGreatestDecrease = 0;
 
+// Loop through finances, subtracting previous month from current month to find lowest profit
 for (var i = 1; i < finances.length; i++) {
     
     var lowestProfit = (finances[i-1][1] - finances[i][1]);
 
     if (lowestProfit > greatestDecrease) {
         greatestDecrease = lowestProfit
-        monthGreatestDecrease = finances[i][0];
+        monthGreatestDecrease = finances[i][0]; // month index of item with greated decrease
     }
 }
 
 
-// LOG ALL RESULTS IN CONSOLE
+// LOG ALL RESULTS IN CONSOLE USING CONCATENATION
 
-console.log("Financial Analysis");
-console.log("----------------------------");
-console.log("Total Months: " + totalMonths);
-console.log("Total: $" + totalFinances);
-console.log("Average Change: $" + averageChange);
-console.log("Greatest Increase in Profits: " + monthGreatestIncrease + " $" + greatestIncrease);
-console.log("Greatest Decrease in Profits: " + monthGreatestDecrease+ " $" + greatestDecrease);
+console.log(`
+    Financial Analysis
+    ----------------------------
+    Total Months: ${totalMonths}
+    Total: $${totalFinances}
+    Average Change: $${averageChange}
+    Greatest Increase in Profits: ${monthGreatestIncrease} ($${greatestIncrease})
+    Greatest Decrease in Profits: ${monthGreatestDecrease} ($-${greatestDecrease})
+    `)
